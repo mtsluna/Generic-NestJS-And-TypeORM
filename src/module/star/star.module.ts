@@ -3,11 +3,11 @@ import { AppController } from '../../app.controller';
 import { AppService } from '../../app.service';
 import { StarController } from './star.controller';
 import { StarService } from './star.service';
-import { Star } from '../../entity/star';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { StarRepository } from './star.repository';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Star])],
+  imports: [TypeOrmModule.forFeature([StarRepository])],
   controllers: [AppController, StarController],
   providers: [AppService, StarService],
 })
