@@ -1,8 +1,9 @@
 import { Module } from '@nestjs/common';
-import { PlanetController } from './planet.controller';
-import { PlanetService } from './planet.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { PlanetRepository } from './planet.repository';
+import { Planet } from '../entity/planet';
+import { PlanetController } from '../controllers/planet.controller';
+import { PlanetService } from '../services/planet.service';
+import { PlanetRepository } from '../repositories/planet.repository';
 
 @Module({
   imports: [TypeOrmModule.forFeature([PlanetRepository])],

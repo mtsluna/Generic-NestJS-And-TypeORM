@@ -1,17 +1,29 @@
-import { Column, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, JoinColumn, OneToOne, ManyToOne } from 'typeorm';
 import { Base } from './base';
 import { Star } from './star';
 
+//Se determina que la clase es una entidad
+// {name: 'xxx'} -> Parametros
+//  ^ Nombre de la clase
 @Entity({name: "api_planet"})
+//Cabecera de la clase
 export class Planet extends Base {
 
+  //Anotación que determina a la columna (Opcional)
+  // {name: 'xxx'} -> parametros
+  //  ^ Nombre del atributo en la tabla
   @Column({name: "planet_name"})
-  private _name:string;
+  private name:string;
 
   @Column({name: "planet_size"})
-  private _size:number;
+  private size:number;
 
-  @OneToOne(type => Star)
+  //Anotacion que determina que un objeto de A contiene una relacion con uno de B
+  //type => Star determina el objeto asociado
+  @ManyToOne(type => Star, {cascade: true, eager: true})
+  //Anotación que determina la columna que actua de clave foranea
+  // {name: 'xxx'} -> parametros
+  //  ^ Nombre de la columna
   @JoinColumn({name: "planet_fk_star"})
   private star:Star;
 
@@ -19,20 +31,28 @@ export class Planet extends Base {
     super();
   }
 
-  get name(): string {
-    return this._name;
+  getName(): string {
+    return this.name;
   }
 
-  set name(value: string) {
-    this._name = value;
+  setName(value: string) {
+    this.name = value;
   }
 
-  get size(): number {
-    return this._size;
+  getSize(): number {
+    return this.size;
   }
 
-  set size(value: number) {
-    this._size = value;
+  setSize(value: number) {
+    this.size = value;
+  }
+
+  getStar(): Star {
+    return this.star;
+  }
+
+  setStar(value: Star) {
+    this.star = value;
   }
 
 }
