@@ -9,7 +9,6 @@ export class BaseService<T> implements IBaseService<T> {
     private readonly genericRepository: Repository<T>
   ) { }
 
-  //Generic CRUD
   findAll(): Promise<T[]> {
     try {
       return <Promise<T[]>>this.genericRepository.find();
@@ -28,9 +27,12 @@ export class BaseService<T> implements IBaseService<T> {
 
   async update(id:string,entity: T): Promise<any> {
     try {
-      const responseAux = await this.genericRepository.findOne(id);
+      const responseAux:Object = await this.genericRepository.findOne(id);
       if(responseAux == null) throw new NotFoundException("El id no existe");
-      const response = this.genericRepository.update(id,entity);
+
+      let mergeEntity:any = Object.assign(responseAux, entity);
+      const response: T = await this.genericRepository.save(mergeEntity);
+
       return response;
     } catch (error) {
       throw new BadGatewayException(error);
