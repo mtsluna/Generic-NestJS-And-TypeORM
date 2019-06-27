@@ -1,4 +1,4 @@
-import { Get, Res, Param, HttpStatus, Post, Body, Put, Delete } from '@nestjs/common';
+import { Get, Res, Param, HttpStatus, Post, Body, Put, Delete, Controller } from '@nestjs/common';
 import { IBaseService } from '../services/iBase.service';
 
 export class BaseController<T> {
@@ -26,7 +26,7 @@ export class BaseController<T> {
   }
 
   @Get('/:id')
-  async getOne(@Res() res, @Param('id') id): Promise<T> {   
+  async getOne(@Res() res, @Param('id') id:number): Promise<T> {   
     
     try {
       
@@ -66,7 +66,7 @@ export class BaseController<T> {
   }
 
   @Put('/:id')
-  async put(@Res() res, @Body() entity:T, @Param('id') id): Promise<T>{
+  async put(@Res() res, @Body() entity:T, @Param('id') id:number): Promise<T>{
     
     try {
       
@@ -86,12 +86,12 @@ export class BaseController<T> {
   }
 
   @Delete('/:id')
-  async delete(@Res() res, @Param('id') id){
+  async delete(@Res() res, @Param('id') id:number){
     
     try {
       
       this._IBaseService.delete(id);
-      return res.status(HttpStatus.OK).json();
+      return res.status(HttpStatus.NO_CONTENT).json();
 
     } catch (error) {
       

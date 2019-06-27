@@ -3,7 +3,7 @@ import { BaseController } from './base.controller';
 import { DetalleFactura } from '../entity/detalleFactura';
 import { DetalleFacturaService } from '../services/detalle-factura.service';
 
-@Controller('detalle-factura')
+@Controller('api/v1/detalleFactura')
 export class DetalleFacturaController extends BaseController<DetalleFactura>{
     
     constructor(private readonly service:DetalleFacturaService){
