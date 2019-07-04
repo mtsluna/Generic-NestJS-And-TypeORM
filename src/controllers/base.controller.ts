@@ -11,7 +11,7 @@ export class BaseController<T> {
     try {
       
       const results: T[] = await this._IBaseService.findAll();
-      return res.status(HttpStatus.FOUND).json(results);
+      return res.status(HttpStatus.OK).json(results);
 
     } catch (error) {
      
@@ -31,7 +31,7 @@ export class BaseController<T> {
     try {
       
       const result: T = await this._IBaseService.findOne(id);
-      return res.status(HttpStatus.FOUND).json(result);
+      return res.status(HttpStatus.OK).json(result);
 
     } catch (error) {
       
